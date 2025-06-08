@@ -29,7 +29,6 @@ static bool isInt(const std::string &s)
     char *end;
     errno = 0;
     long val = std::strtol(s.c_str(), &end, 10);
-    std::cout << "val: " << val << ", errno: " << errno << ", end: '" << end << "'" << std::endl;
     return *end == '\0' && errno != ERANGE && val >= std::numeric_limits<int>::min() && val <= std::numeric_limits<int>::max();
 }
 
@@ -61,7 +60,6 @@ void ScalarConverter::convert(const std::string &literal)
 
     if (isChar(literal))
     {
-        // ScalarConverter::convertChar(literal[0]);
         std::cout << "char: '" << literal[0] << "'" << std::endl;
         std::cout << "int: " << static_cast<int>(literal[0]) << std::endl;
         std::cout << std::fixed << std::setprecision(1);
@@ -110,17 +108,11 @@ void ScalarConverter::convert(const std::string &literal)
     // Char
     if (std::isnan(d) || std::isinf(d) ||
         d < std::numeric_limits<char>::min() || d > std::numeric_limits<char>::max())
-    {
         std::cout << "char: impossible\n";
-    }
     else if (!std::isprint(static_cast<char>(d)))
-    {
         std::cout << "char: Non displayable\n";
-    }
     else
-    {
         std::cout << "char: '" << static_cast<char>(d) << "'\n";
-    }
 
     // Int
     if (std::isnan(d) || std::isinf(d) || d > INT_MAX || d < INT_MIN)
@@ -137,12 +129,3 @@ void ScalarConverter::convert(const std::string &literal)
     std::cout << std::setprecision(doublePrecision);
     std::cout << "double: " << d << "\n";
 }
-
-// void ScalarConverter::convertChar(const char &c)
-// {
-    // std::cout << "char: '" << c << "'" << std::endl;
-    // std::cout << "int: " << static_cast<int>(c) << std::endl;
-    // std::cout << std::fixed << std::setprecision(1);
-    // std::cout << "float: " << static_cast<float>(c) << "f" << std::endl;
-    // std::cout << "double: " << static_cast<double>(c) << std::endl;
-// }
