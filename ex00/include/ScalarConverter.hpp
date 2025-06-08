@@ -12,10 +12,6 @@ private:
     ScalarConverter(const ScalarConverter&) = delete;
     ScalarConverter& operator=(const ScalarConverter&) = delete;
     ~ScalarConverter() = delete;
-
-    static void convertChar(const char &c);
-    static void convertInt(const int &i);
-    static void convertFloat(const float &f);
 };
 
 #endif
