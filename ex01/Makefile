@@ -1,18 +1,24 @@
-NAME = serialize
-
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++17
+CXXFLAGS = -Wall -Wextra -Werror -std=c++17 -Iinclude
 
-SRCS = main.cpp Serializer.cpp
-OBJS = $(SRCS:.cpp=.o)
+SRCDIR = src
+OBJDIR = obj
+NAME = serializer
+
+SRCS = $(SRCDIR)/main.cpp $(SRCDIR)/Serializer.cpp
+OBJS = $(OBJDIR)/main.o $(OBJDIR)/Serializer.o
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	@mkdir -p $(OBJDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)
